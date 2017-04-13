@@ -1,8 +1,9 @@
-Descrição do projeto
-=========
 
 jats2tex
-------------
+========
+
+Descrição do projeto
+--------------------
 
 Um conversor de *xml*  para ConTeXt, que 
 segue a documentação do SciELO Publishing Schema.
