@@ -34,9 +34,9 @@ recebe arquivos *xml* via *post* e devolve arquivos *.tex.
 MultiSchemas
 -------
 
-O conversor pode servir ainda para a conversão de outros esquemas de *xml* (*.xd). 
+O conversor pode servir ainda para outros esquemas de *xml* (*.xd). 
 A correspondência entre os blocos de *xml* e os comandos *tex*
-podem ser editados em uma aplicação *web* do tipo *admin*.
+pode ser feita em uma aplicação *web*.
 
 Separação de Metatados
 ---------
