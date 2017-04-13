@@ -45,7 +45,7 @@ Tecnologia
 * xslt
 * Haskell & Pandoc
 
-[Fluxo do uso da apliação.](04.jpg)
+![Fluxo do uso da apliação.](04.jpg)
 
 Piloto
 -------------------
