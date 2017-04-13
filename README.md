@@ -38,6 +38,11 @@ O conversor pode servir ainda para a conversão de outros esquemas de *xml* (*.x
 A correspondência entre os blocos de *xml* e os comandos *tex*
 podem ser editados em uma aplicação *web* do tipo *admin*.
 
+Separação de Metatados
+---------
+
+Para a integração do xml, os metadados dos livros estará disponível em arquivo separados (Ex: "título", "autor"), em formato Json. O conversor é responsável por ler este metadados e criar um arquivo .tex que disponibiliza as variáveis (Ex: \title, \author) para uso em lugares específicos.  
+
 Tecnologia
 ==========
 
