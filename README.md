@@ -1,28 +1,26 @@
 Descrição do projeto
 =========
 
-Command line
+jats2tex
 ------------
 
-*xml2tex* é um conversor de *xml jats* para ConTeXt, que 
-segue as exigências do projeto SciELO.
+Um conversor de *xml*  para ConTeXt, que 
+segue a documentação do SciELO Publishing Schema.
 
-Trata-se de uma aplicação de linha de comando que pode ser 
+Trata-se, basicamente, de uma aplicação de linha de comando que pode ser 
 executada via *prompt*, podendo ser usado para 
 a conversão de arquivos em massa, localmente, ou como 
-parte integrada de qualquer aplicação.
+parte integrada de qualquer aplicação, conforme o exemplo:
 
 ```
-xml2tex <Arquivo>.xml -o <Arquivo.tex>
+jats2tex <Arquivo>.xml -o <Arquivo.tex>
 ```
 
-
-O objetivo desse conversor é transformar as tags e os atributos do XML jats
-para um padrão ConTeXt. Será possível escolher, um template de LaTeX diferente do *default*:
+É possível referenciar um template ConTeXt específico:
 
 ```
 # uso com templates .tex
-xml2tex <Arquivo>.xml -t <template> -o <Arquivo.tex>
+jats2tex <Arquivo>.xml -t <template> -o <Arquivo.tex>
 ```
 
 
@@ -32,26 +30,22 @@ Microservice
 O projeto inclui ainda um *microservice* ou servidor que 
 recebe arquivos *xml* via *post* e devolve arquivos *.tex. 
 
-Schemas
+MultiSchemas
 -------
 
-O conversor pode servir ainda para outros esquemas de *xml* (*.xd). 
+O conversor pode servir ainda para a conversão de outros esquemas de *xml* (*.xd). 
 A correspondência entre os blocos de *xml* e os comandos *tex*
 podem ser editados em uma aplicação *web* do tipo *admin*.
 
 Tecnologia
 ==========
 
-A aplicação deve fazer parte de um microsserviço *web* podendo ser 
-integrada a qualquer outra aplicação para gerar arquivos *.tex a partir 
-de XML. 
-
-Avaliamos a possibilidade de tornar a aplicação compatível com o 
-projeto de conversão chamado \textbf{pandoc}, mas só poderemos 
-concluir se isto é possível após iniciarmos o desenvolvimento. 
+* Ferramentas [xml nativas do ConTeXt](http://wiki.contextgarden.net/XML).
+* xslt
+* Haskell & Pandoc
 
 
-Descrição do piloto
+Piloto
 -------------------
 
 Fizemos uma prova de conceito que pode ser acessada [neste endereço](beijaflor-jatex.herokuapp.com).
