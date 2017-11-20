@@ -1,0 +1,682 @@
+article[@xml:lang="pt"]:
+  head: |
+    % template.yaml 2.1.2.2 (sec/p inline-graphic)
+    \documentclass{article}
+    \usepackage{scielo}
+
+    @@heads
+    
+    \begin{document}
+    \selectlanguage{portuges}
+    \newcommand{\lingua}{Português}
+    \maketitle
+    \tableofcontents
+
+    @@bodies
+
+    \input{metadata}
+    \end{document}
+
+article[@xml:lang="en"]: 
+  head:  |
+    \documentclass{article}
+    \usepackage{scielo}
+
+    @@heads
+    
+    \begin{document}
+    \selectlanguage{english}
+    \newcommand{\lingua}{Inglês}
+    \maketitle
+    \tableofcontents
+
+    @@bodies
+
+    \input{metadata}
+    \end{document}
+
+article[@xml:lang="fr"]: 
+  head:  |
+    \documentclass{article}
+    \usepackage{scielo}
+
+    @@heads
+    
+    \begin{document}
+    \selectlanguage{french}
+    \newcommand{\lingua}{Francês}
+    \maketitle
+    \tableofcontents
+
+    @@bodies
+
+    \input{metadata}
+    \end{document}
+
+article[@xml:lang="es"]: 
+  head:  |
+    \documentclass{article}
+    \usepackage{scielo}
+
+    @@heads
+    
+    \begin{document}
+    \selectlanguage{spanish}
+    \newcommand{\lingua}{Espanhol}
+    \maketitle
+    \tableofcontents
+
+    @@bodies
+
+    \input{metadata}
+    \end{document}
+
+
+
+sub-article: ""
+
+
+alt-title[@alt-title-type="title-running-head"]: 
+  head: |
+
+    \newcommand{\alttitle}{@@children}
+
+
+alt-title[@alt-title-type="author-running-head"]: 
+  head: |
+
+    \newcommand{\alttitleauthor}{@@children}
+
+article-title:
+  head: |
+
+    \title{@@children\titlegroup{}} 
+
+subtitle[1]:
+  head: |
+
+      \newcommand{\subtitle}{@@children}
+
+trans-title-group[@xml:lang="pt"]:
+  head: |
+
+      \newcommand{\transtitlefr}{@@children}
+
+
+trans-title-group[@xml:lang="fr"]:
+  head: |
+
+      \newcommand{\transtitlefr}{@@children}
+
+
+trans-title-group[@xml:lang="en"]:
+  head: |
+
+      \newcommand{\transtitleen}{@@children}
+
+
+trans-title-group[@xml:lang="es"]:
+  head: |
+
+      \newcommand{\transtitlees}{@@children}
+
+
+
+
+trans-abstract[@xml:lang="zh"]: ""
+
+trans-abstract[@xml:lang="ar"]: ""
+
+trans-title-group[@xml:lang="zh"]: ""
+
+trans-title-group[@xml:lang="ar"]: ""
+
+trans-title-group[@xml:lang="ru"]: ""
+
+trans-subtitle: ""
+
+issn:
+  head: |
+
+    \newcommand{@@lua(
+    pub_type = attr('pub-type')
+    if pub_type ~= '' then
+      return '\\issn' .. pub_type
+    end
+    return '\\issn'
+    )@@}{@@children}
+    
+journal-id[@journal-id-type="nlm-ta"]: 
+  head: |
+
+    \newcommand{\journalid}{@@children}
+
+journal-id[@journal-id-type="publisher-id"]:
+  head: |
+
+    \newcommand{\publisherid}{@@children}
+    
+
+journal-title: 
+  head: |
+
+    \newcommand{\journaltitle}{@@children}
+
+abbrev-journal-title:
+  head: |
+
+    \newcommand{\abbrevjournaltitle}{@@children}
+    
+publisher-name:
+  head: |
+  
+    \newcommand{\publishername}{@@children}
+
+author-notes:
+  head: |
+
+    \def\authornotes{@@children}
+
+
+article-id[@pub-id-type="other"]: ""
+article-id[@pub-id-type="doi"]:
+  head: |
+
+    \newcommand\articledoi{DOI @@children}
+
+article-id[@pub-id-type="publisher-id"]: 
+  head: |
+
+    \newcommand\articleid{@@children}
+
+
+volume:
+  head: |
+
+    \def\volume{@@children}
+
+issue:
+  head: |
+
+    \def\issue{@@children}
+
+fpage:
+  head: |
+
+    \def\fpage{@@children}
+
+lpage:
+  head: |
+
+    \def\lpage{@@children}
+
+
+license[@xlink:href="http://creativecommons.org/licenses/by/3.0/"]: 
+    head: |
+
+        \newcommand{\cclicense}{\ccby}
+
+license[@xlink:href="http://creativecommons.org/licenses/by-nc/3.0/"]: 
+    head: |
+
+        \newcommand{\cclicense}{\ccbync}
+
+
+license[@xlink:href="http://creativecommons.org/licenses/by-sa/3.0/"]: 
+    head: |
+
+        \newcommand{\cclicense}{\ccbysa}
+
+
+license[@xlink:href="http://creativecommons.org/licenses/by-nc-sa/3.0/"]: 
+    head: |
+
+        \newcommand{\cclicense}{\ccbyncsa}
+
+
+license[@xlink:href="http://creativecommons.org/licenses/by-nc-nd/3.0/"]: 
+    head: |
+
+        \newcommand{\cclicense}{\ccbyncnd}            
+
+
+license[@xlink:href="http://creativecommons.org/licenses/by-pd/3.0/"]: 
+    head: |
+
+        \newcommand{\cclicense}{\ccpd}  
+
+copyright-statement: 
+    head:  |
+
+        \newcommand{\cclicense}{@@children $^{\tiny{\textregistered}}$ }
+
+pub-date: 
+  head: |
+
+    @@lua(return '\\date{' .. find '//day' .. ' ' .. find '//month' .. ' ' .. find '//year' .. '}')@@
+
+date: 
+  head: |
+
+       @@lua(if attr('date-type') ~= 'accepted' then 
+       
+       return '\\newcommand{\\historydateaccepted}{' .. find '//day' .. '-' .. find '//month' .. '-' .. find '//year' .. '}'
+       
+       end 
+
+       return '\\newcommand{\\historydatereceived}{' .. find '//day' .. '-' .. find '//month' .. '-' .. find '//year' .. '}')@@
+
+ack:
+  head: |
+      \newcommand{\ack}{@@children}
+
+subject:
+  head: |
+
+    \def\subject{@@children}
+
+
+kwd-group:
+  head: |
+  
+    \newcommand{@@lua(
+    lang = attr('xml:lang')
+    if lang ~= 'pt' then
+      return '\\kwdgroup' .. lang
+    end
+    return '\\kwdgroup'
+    )@@}{@@lua(
+    title = find('//title')
+    keyword_list = findAll('//kwd')
+    return title .. table.concat(keyword_list, ', ') 
+    )@@}
+
+list-item: |
+  \item @@children
+
+list[@list-type="bullet"]: |
+   \begin{itemize}
+   @@children \end{itemize}
+   
+   
+list[@list-type="order"]: |
+   \begin{enumerate}
+   @@children \end{enumerate}
+   
+list[@list-type="alpha-lower"]: |
+   \begin{enumerate}[a)]
+   @@children \end{enumerate}
+
+list[@list-type="alpha-upper"]: |
+   \begin{enumerate}[(A)]
+   @@children \end{enumerate}
+      
+list[@list-type="roman-lower"]: |
+   \begin{enumerate}[i.]
+   @@children \end{enumerate}
+ 
+list[@list-type="roman-upper"]: |
+   \begin{enumerate}[(I)]
+   @@children \end{enumerate}
+
+sec: |
+   \section{@@lua(return find('sec/title'))@@}
+   @@children
+
+disp-quote: |
+
+  \begin{quote}
+  @@children
+  \end{quote}
+
+
+copyright-year: 
+  head: |
+  
+    \newcommand{\copyrightyear}{@@children}
+
+ext-link: "\\href{@@children}"
+
+
+codebold:
+  head: |
+    \code{@@children}
+
+
+element-citation: ""
+
+ref-list: |
+
+  \section*{@@lua(return find('//title'))@@}
+  \begin{itemize}
+  @@lua(return find('//ref'))@@ 
+  \end{itemize}
+
+ref: |
+
+    \item[@@lua(return find '//label')@@] @@lua(return find '//mixed-citation')@@  
+
+
+xref[@ref-type="fig"]: |
+    @@children~\ref{fig:@@lua(return attr('rid'))@@}
+
+xref[@ref-type="fn"]:  |
+    @@lua(return "\\footnote{\\" .. attr 'rid' .."}")@@  
+
+
+xref[@ref-type="bibr"]:  |
+    \textsuperscript{[}@@children\textsuperscript{]}  
+
+
+fn-group//fn: 
+   head: |
+     
+     %%% Nota @@lua(return attr 'id')@@ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     \expandafter\newcommand\csname @@lua(return attr 'id')@@\endcsname{@@lua(return find ('//p'))@@}
+
+name:  "@@lua(
+  s = find '//surname'
+  g = find '//given-names'
+  return s .. ', ' .. g)@@"
+
+contrib:
+  head: |
+
+    \author[@@lua(
+      return find('//xref[@ref-type="aff"]')
+    )@@]{@@lua(
+      return find('//name')
+    )@@}
+
+aff:
+  head: |
+  
+    \affil[@@lua(
+      return find('//label')
+    )@@]{@@lua(
+      return find('//institution[@content-type="orgname"]')
+    )@@}
+
+break: "\n"
+
+
+p: |
+
+  @@lua(
+    align_to_ragged = {
+      ["center"] = "Center",
+      ["left"] = "FlushLeft",
+      ["right"] = "FlushRight",
+    }
+
+    if attr('align') == nil then
+      return children()
+    end
+
+    env = align_to_ragged[attr('align')]
+    if env == nil then
+      return children()
+    end
+ 
+    return string.format([[
+      \begin{%s}
+      %s
+      \end{%s}
+    ]], env, children(), env)
+  )@@
+
+
+
+/abstract: |
+  
+    \begingroup
+    \renewcommand{\section}[1]{\subsection*{#1}}
+    @@lua(
+        abstit = find('abstract/title')
+         if abstit ~= '' then
+         return '\\renewcommand{\\abstractname}{' .. abstit ..'}'
+         end
+    return ''
+    )@@
+    \begin{abstract}
+    @@lua(
+    ss = find "//sec"
+    if ss == '' then
+    return find "//p"
+    end
+    return find "//sec"
+    )@@
+    \ifdef{\kwdgroup}{\iflanguage{portuges}{\medskip\noindent\textbf{Palavras-chave:} \kwdgroup}{}}{}
+    \ifdef{\kwdgroupen}{\iflanguage{english}{\medskip\noindent\textbf{Keywords:} \kwdgroupen}{}}{}
+    \ifdef{\kwdgroupes}{\iflanguage{spanish}{\medskip\noindent\textbf{Palavras claves:} \kwdgroupes}{}}{}
+    \ifdef{\kwdgroupfr}{\iflanguage{french}{\medskip\noindent\textbf{Mots clés:} \kwdgroupfr}{}}{}
+    \end{abstract}
+    \endgroup
+
+
+trans-abstract[@xml:lang="es"]: |
+
+    \begingroup
+    \renewcommand{\section}[1]{\subsection*{#1}}
+    @@lua(return '\\begin{otherlanguage}{spanish}')@@
+    @@lua(
+        abstit = find('trans-abstract/title')
+         if abstit ~= '' then
+         return '\\renewcommand{\\abstractname}{' .. abstit ..'}'
+         end
+    return ''
+    )@@
+    \begin{abstract}
+    @@lua(
+    ss = find "//sec"
+    if ss == '' then
+    return find "//p"
+    end
+    return find "//sec"
+    )@@
+    \ifdef{\kwdgroupes}{\medskip\noindent\textbf{Palavras claves:} \kwdgroupes}{}
+    \end{abstract}
+    \end{otherlanguage}
+    \endgroup
+
+sup: |
+    \textsuperscript{@@children}
+
+trans-abstract[@xml:lang="en"]: |
+
+    \begingroup
+    \renewcommand{\section}[1]{\subsection*{#1}}
+    @@lua(return '\\begin{otherlanguage}{english}')@@
+    @@lua(
+        abstit = find('trans-abstract/title')
+         if abstit ~= '' then
+         return '\\renewcommand{\\abstractname}{' .. abstit ..'}'
+         end
+    return ''
+    )@@
+    \begin{abstract}
+    @@lua(
+    ss = find "//sec"
+    if ss == '' then
+    return find "//p"
+    end
+    return find "//sec"
+    )@@
+    \ifdef{\kwdgroupen}{\medskip\noindent\textbf{Keywords:} \kwdgroupen}{}
+    \end{abstract}
+    \end{otherlanguage}
+    \endgroup
+
+trans-abstract[@xml:lang="ru"]: |
+
+    \begingroup
+    \renewcommand{\section}[1]{\subsection*{#1}}    
+    @@lua(return '\\begin{otherlanguage}{russian}')@@
+    @@lua(
+        abstit = find('trans-abstract/title')
+         if abstit ~= '' then
+         return '\\renewcommand{\\abstractname}{' .. abstit ..'}'
+         end
+    return ''
+    )@@
+    \begin{abstract}
+    @@lua(
+    ss = find "//sec"
+    if ss == '' then
+    return find "//p"
+    end
+    return find "//sec"
+    )@@
+    \end{abstract}
+    \ifdef{\kwdgroupru}{\medskip\noindent\textbf{ключевые слова:} \kwdgroupru}{}
+    \end{otherlanguage}
+    \endgroup
+
+
+trans-abstract[@xml:lang="it"]: |
+
+    \begingroup
+    \renewcommand{\section}[1]{\subsection*{#1}}
+    @@lua(return '\\begin{otherlanguage}{italian}')@@
+    @@lua(
+        abstit = find('trans-abstract/title')
+         if abstit ~= '' then
+         return '\\renewcommand{\\abstractname}{' .. abstit ..'}'
+         end
+    return ''
+    )@@
+    \begin{abstract}
+    @@lua(
+    ss = find "//sec"
+    if ss == '' then
+    return find "//p"
+    end
+    return find "//sec"
+    )@@
+    \end{abstract}
+    \ifdef{\kwdgroupit}{\medskip\noindent\textbf{Parole:} \kwdgroupit}{}
+    \end{otherlanguage}
+    \endgroup
+
+
+trans-abstract[@xml:lang="de"]: |
+
+    \begingroup
+    \renewcommand{\section}[1]{\subsection*{#1}}
+    @@lua(return '\\begin{otherlanguage}{german}')@@
+    @@lua(
+        abstit = find('trans-abstract/title')
+         if abstit ~= '' then
+         return '\\renewcommand{\\abstractname}{' .. abstit ..'}'
+         end
+    return ''
+    )@@
+    \begin{abstract}
+    @@lua(
+    ss = find "//sec"
+    if ss == '' then
+    return find "//p"
+    end
+    return find "//sec"
+    )@@
+    \ifdef{\kwdgroupde}{\medskip\noindent\textbf{Schlüsselwörter:} \kwdgroupde}{}
+    \end{abstract}
+    \end{otherlanguage}
+    \endgroup
+
+
+trans-abstract[@xml:lang="fr"]: |
+
+    \begingroup
+    \renewcommand{\section}[1]{\subsection*{#1}}
+    @@lua(return '\\begin{otherlanguage}{french}')@@
+    @@lua(
+        abstit = find('trans-abstract/title')
+         if abstit ~= '' then
+         return '\\renewcommand{\\abstractname}{' .. abstit ..'}'
+         end
+    return ''
+    )@@
+    \begin{abstract}
+    @@lua(
+    ss = find "//sec"
+    if ss == '' then
+    return find "//p"
+    end
+    return find "//sec"
+    )@@
+    \ifdef{\kwdgroupfr}{\medskip\noindent\textbf{Mots clés:} \kwdgroupfr}{}
+    \end{abstract}
+    \end{otherlanguage}
+    \endgroup
+
+
+
+
+/fig: |
+  \begin{figure}
+  \includegraphics[width=\textwidth]{@@lua(return find "//graphic")@@}
+  \caption{@@lua(return find "/fig/title")@@}\label{fig:@@lua(return attr('id'))@@}
+  \end{figure}
+
+graphic: "@@lua(return attr 'xlink:href')@@"
+
+
+inline-formula/inline-graphic: "\\includegraphics{@@lua(return attr 'xlink:href')@@}" 
+ 
+inline-graphic: "\\includegraphics[height=.8\\baselineskip]{@@lua(return attr 'xlink:href')@@}"
+
+b: |
+  \textbf{@@children}
+
+
+caption/title: |
+  \caption{@@children}
+
+table: |
+
+  \begin{table}
+  \begin{xtabular}{@@heads}
+  \hline
+  @@bodies
+  \end{xtabular}
+  \end{table}
+
+thead/tr:
+  head: |
+    @@lua(
+      local ret = {}
+      for i, element in ipairs(findAll('//th'))
+      do
+        ret[i] = 'l'
+      end
+      return ' ' .. table.concat(ret, ' ') .. ' '
+    )@@
+
+  body: |
+    @@lua(
+      return table.concat(findAll('//th'), ' & ') .. '\\\\ \\hline \n'
+    )@@
+
+italic: |
+  \textit{@@children}
+
+tbody/tr: |
+  @@lua(
+    return table.concat(findAll('//td'), ' & ') .. '\\\\ \\hline \n'
+  )@@
+
+td: |
+  @@lua(
+    output = children()
+
+    if attr('colspan') ~= "" then
+      output = "\\multicolumn{" .. attr('colspan') .. "}{l}{" .. output .. "}"
+    end
+
+    if attr('rowspan') ~= "" then
+      output = "\\multirow{" .. attr('rowspan') .. "}{*}{" .. output .. "}"
+    end
+
+    return output
+  )@@
