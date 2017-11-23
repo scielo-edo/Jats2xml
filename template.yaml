@@ -320,8 +320,13 @@ list[@list-type="roman-upper"]: |
    @@children \end{enumerate}
 
 sec: |
-   \section{@@lua(return find('sec/title'))@@}
-   @@children
+   \section{@@heads}
+   @@bodies
+   
+title:
+  head: |
+    @@children
+  bodies: ""
 
 disp-quote: |
 
